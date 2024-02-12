@@ -2,6 +2,8 @@ const discord = require("discord.js");
 const express = require("express");
 const cron = require("cron").CronJob;
 const service = require("./services/service");
+const randomiseServer = require("./utils/randomiseServer")
+const publish = require("./utils/publish")
 const embed = require("./utils/embed");
 const fs = require("fs");
 const app = express();
@@ -41,6 +43,10 @@ const client = new discord.Client({
       ],
 });
 
+// Paywright Config
+
+
+
 // SlashCommands 
 client.slashCommands = new discord.Collection();
 const slashCommandsFiles = fs
@@ -76,19 +82,12 @@ client.login(process.env.DISCORD_TOKEN);
 // TODO: Hacer  que publique en un rango de horario
 // meme generator
 new cron(
-    "2 * * * *",
+    "*/1 * * * *",
     async() => {
-        await service.memeRedditEng()
-            .then(async (data) => {
-                let message
-                if(data !== undefined){
-                    message = embed.getEmbed(data);
-                    await client.channels.cache
-                        .get(process.env.CHANNEL_ID)
-                        .send({ embeds: [message] });
-                }
-            })
-            .catch(err => console.log(err));
+      const serverMeme = randomiseServer.randomServer()
+      // Post Meme
+      publish.postMeme(serverMeme, client)
+
     },
     null,
     true,
