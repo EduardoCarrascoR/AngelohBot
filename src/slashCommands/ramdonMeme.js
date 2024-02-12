@@ -16,9 +16,9 @@ module.exports = {
   async execute(client, interaction) {
     // TODO: implementar codigo server random
     /* randomServer.randomServer(); */
-    service.memeRedditEng().then(async(data) => {
+    service.memeReddit().then(async(data) => {
       if(data !== undefined){
-        const message = await embed.getEmbed(data);
+        const message = await embed.getEmbed(data, "Reddit");
         await interaction.reply({embeds: [message]});
       }
     })

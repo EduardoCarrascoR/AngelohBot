@@ -82,7 +82,7 @@ client.login(process.env.DISCORD_TOKEN);
 // TODO: Hacer  que publique en un rango de horario
 // meme generator
 new cron(
-    "*/1 * * * *",
+    "* 12-23/2 * * 0,5,6",
     async() => {
       const serverMeme = randomiseServer.randomServer()
       // Post Meme
