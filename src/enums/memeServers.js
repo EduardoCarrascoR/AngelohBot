@@ -1,10 +1,8 @@
 const MemeServers = {
-    "Reddit": 0,
-    "Jaidefinichon": 1,
-    /* "ApiMeme": 2, */
-
-}
+  Reddit: 0,
+  Jaidefinichon: 1,
+};
 
 module.exports = {
-    MemeServers
-}
+  MemeServers,
+};

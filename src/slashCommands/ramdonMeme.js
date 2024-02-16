@@ -1,7 +1,6 @@
 const { SlashCommandBuilder } = require("discord.js");
-const service = require("../services/service")
-const embed = require("../utils/embed")
-const randomServer = require("../utils/randomiseServer")
+const service = require("../services/service");
+const embed = require("../utils/embed");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -14,13 +13,11 @@ module.exports = {
    */
 
   async execute(client, interaction) {
-    // TODO: implementar codigo server random
-    /* randomServer.randomServer(); */
-    service.memeReddit().then(async(data) => {
-      if(data !== undefined){
+    service.memeReddit().then(async (data) => {
+      if (data !== undefined) {
         const message = await embed.getEmbed(data, "Reddit");
-        await interaction.reply({embeds: [message]});
+        await interaction.reply({ embeds: [message] });
       }
-    })
+    });
   },
 };
